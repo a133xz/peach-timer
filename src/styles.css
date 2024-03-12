@@ -1,0 +1,127 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  font-weight: 500;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#app {
+  margin: 10px;
+  --color-primary: rgb(9, 105, 218);
+  --color-text: #e34d35;
+  /* rgb(9, 105, 218) */
+}
+
+input,
+button,
+textarea,
+select,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 15px;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin-top: 0;
+}
+
+select {
+  width: 100%;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+input,
+button {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid;
+  border-radius: 6px;
+  appearance: none;
+  margin-bottom: 5px;
+  border-color: rgba(31, 35, 40, 0.15);
+  box-shadow: rgba(31, 35, 40, 0.1) 0px 1px 0px 0px,
+    rgba(255, 255, 255, 0.03) 0px 1px 0px 0px inset;
+}
+
+button {
+  background-color: #80aae2;
+  color: white;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+.nav {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.left {
+  text-align: left;
+}
+
+.form-control {
+  padding: 2px;
+}
