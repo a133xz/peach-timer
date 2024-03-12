@@ -4,11 +4,16 @@
   </div>
   <div class="nav">
     <a href="#/" v-if="currentPath !== '#/' && currentPath !== ''">Back</a>
-    <a href="#/stats" v-if="currentPath === '#/' || currentPath === ''">Stats </a> <span
-          v-if="currentPath === '#/' || currentPath === ''" style="color: var(--color-text);">| </span>
     <a href="#/settings" v-if="currentPath === '#/' || currentPath === ''">Settings</a>
   </div>
 </template>
+
+<style scoped>
+.nav {
+  padding-top: 3px;
+  text-align: center;
+}
+</style>
 
 <script setup>
 import { ref, computed } from 'vue'
@@ -17,13 +22,11 @@ import { ref, computed } from 'vue'
 
 import Home from './routes/Home.vue'
 import Settings from './routes/Settings.vue'
-import Stats from './routes/Stats.vue'
 import NotFound from './routes/NotFound.vue'
 
 const routes = {
   '/': Home,
-  '/settings': Settings,
-  '/stats': Stats
+  '/settings': Settings
 }
 
 const currentPath = ref(window.location.hash)

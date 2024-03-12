@@ -20,8 +20,6 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-size: 15px;
-  font-weight: 500;
 }
 /*
   5. Improve media defaults
@@ -45,8 +43,12 @@ h6 {
   overflow-wrap: break-word;
 }
 
+html {
+  background-color: rgb(241, 241, 241);
+}
+
 #app {
-  margin: 10px;
+  margin: 5px 10px 10px;
   --color-primary: rgb(9, 105, 218);
   --color-text: #e34d35;
   /* rgb(9, 105, 218) */
@@ -59,7 +61,8 @@ select,
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 a {
@@ -75,19 +78,13 @@ p {
   margin-top: 0;
 }
 
-select {
-  width: 100%;
-  font-size: 20px;
-  margin-top: 15px;
-}
-
+select,
 input,
 button {
   width: 100%;
   position: relative;
   display: inline-block;
   padding: 5px 16px;
-  font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   white-space: nowrap;
@@ -104,24 +101,35 @@ button {
 }
 
 button {
-  background-color: #80aae2;
   color: white;
+  background-color: var(--color-primary);
 }
 
-button:active {
+button:disabled {
+  background-color: #80aae2;
+  cursor: default;
+}
+
+button:active:not(:disabled) {
   transform: translateY(2px);
 }
 
-.nav {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 14px;
+select {
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iIzU4NjA2OSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNC40MjcgOS40MjdsMy4zOTYgMy4zOTZhLjI1MS4yNTEgMCAwMC4zNTQgMGwzLjM5Ni0zLjM5NkEuMjUuMjUgMCAwMDExLjM5NiA5SDQuNjA0YS4yNS4yNSAwIDAwLS4xNzcuNDI3ek00LjQyMyA2LjQ3TDcuODIgMy4wNzJhLjI1LjI1IDAgMDEuMzU0IDBMMTEuNTcgNi40N2EuMjUuMjUgMCAwMS0uMTc3LjQyN0g0LjZhLjI1LjI1IDAgMDEtLjE3Ny0uNDI3eiIgLz48L3N2Zz4=);
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  background-size: 16px;
+  appearance: none;
+  padding: 5px;
+  margin-bottom: 0;
+}
+
+.flex {
+  display: flex;
 }
 
 .left {
   text-align: left;
-}
-
-.form-control {
-  padding: 2px;
 }

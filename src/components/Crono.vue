@@ -1,53 +1,11 @@
 <template>
     <div class="flex">
         <div class="left crono-timer">{{ timer }}</div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon" v-if="timerRunning">
-            <path
-                  d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z" />
-        </svg>
+        <div v-if="false" class="animate__animated animate__jackInTheBox animate__infinite">🍑</div>
     </div>
-    <button class="start" @click="controlTimer">{{ timerRunning ? 'Pause' : 'Start' }}</button>
+    <button :disabled="selectedTask === -1" @click="controlTimer">{{ textButton }}</button>
     <!-- <button class="save" @click="saveData">Save</button> -->
 </template>
-
-<style scoped>
-.flex {
-    display: flex;
-}
-
-.crono-timer {
-    font-size: 28px;
-    padding: 15px 0;
-    width: 38px;
-
-}
-
-.start,
-.save {
-    font-weight: bold;
-}
-
-.save {
-    color: white;
-    background-color: rgb(31, 136, 61);
-
-}
-
-.start {
-    background-color: var(--color-primary);
-}
-
-.icon {
-    margin-left: 20px;
-    width: 15px;
-    fill: var(--color-text);
-}
-
-hr {
-
-    margin: 5px -10px;
-}
-</style>
 
 <script setup>
 import { fs } from "@tauri-apps/api";
@@ -58,16 +16,14 @@ const { filePathName } = getFilePathName();
 const props = defineProps(['selectedTask', 'data'])
 
 let timerInterval;
-let segundos = 0;
-let minutos = 0;
-let horas = 0;
+let tiempoTotalSegundos;
 
+const textButton = ref('Start')
 const timer = ref('0s');
-const timerRunning = ref(false);
-const tiempoTotalSegundos = ref(0); // Variable para almacenar el tiempo total en segundos
+const timerRunning = ref(false); // Variable para almacenar el tiempo total en segundos
 
 watch(() => props.selectedTask, (newValue, oldValue) => {
-    saveData()
+    //saveData()
     reiniciarCronometro()
 });
 
@@ -76,7 +32,8 @@ const formatTime = (totalSeconds) => {
         return `${totalSeconds}s`;
     } else if (totalSeconds < 3600) {
         let minutes = Math.floor(totalSeconds / 60);
-        return `${minutes}min`;
+        let seconds = totalSeconds % 60;
+        return `${minutes}min ${seconds}s`;
     } else {
         let hours = Math.floor(totalSeconds / 3600);
         let minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -84,12 +41,14 @@ const formatTime = (totalSeconds) => {
         if (minutes < 10) {
             minutes = `0${minutes}`;
         }
-        return `${hours}:${minutes}h`;
+        return `${hours}:${minutes}h ${seconds}s`;
     }
 }
 
 const controlTimer = () => {
+    textButton.value = "Pause"
     if (timerRunning.value) {
+        textButton.value = "Continue"
         clearInterval(timerInterval);
     } else {
         timerInterval = setInterval(actualizarCronometro, 1000);
@@ -97,30 +56,19 @@ const controlTimer = () => {
     timerRunning.value = !timerRunning.value;
 };
 
+function actualizarCronometro () {
+    tiempoTotalSegundos++; // Aumentar el tiempo total en segundos
+    timer.value = formatTime(tiempoTotalSegundos);
+}
 
 function reiniciarCronometro () {
+    textButton.value = 'Start'
     clearInterval(timerInterval);
-    segundos = 0;
-    minutos = 0;
-    horas = 0;
-    tiempoTotalSegundos.value = 0; // Reiniciar también el tiempo total en segundos
+    tiempoTotalSegundos = 0; // Reiniciar también el tiempo total en segundos
     timer.value = "0s"
     timerRunning.value = false
 }
 
-function actualizarCronometro () {
-    segundos++;
-    tiempoTotalSegundos.value++; // Aumentar el tiempo total en segundos
-    if (segundos === 60) {
-        segundos = 0;
-        minutos++;
-    }
-    if (minutos === 60) {
-        minutos = 0;
-        horas++;
-    }
-    timer.value = formatTime(horas * 3600 + minutos * 60 + segundos);
-}
 
 // Guardado
 const saveData = async () => {
@@ -143,7 +91,7 @@ const createEntry = (tasks) => {
         // Verificar si el día ya existe
         if (day.day === formattedDate) {
             // Sumar el tiempo al día existente
-            day.time += tiempoTotalSegundos.value;
+            day.time += tiempoTotalSegundos;
             dayExists = true;
             break; // Terminar la iteración ya que encontramos el día
         }
@@ -163,3 +111,69 @@ const saveJson = async (tasks) => {
     }
 }
 </script>
+
+
+<style scoped>
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crono-timer {
+    font-size: 28px;
+    padding: 15px 0;
+    width: 38px;
+}
+
+.save {
+    color: white;
+    background-color: rgb(31, 136, 61);
+}
+
+@-webkit-keyframes jackInTheBox {
+    from {
+        opacity: 1;
+        -webkit-transform-origin: center bottom;
+        transform-origin: center bottom;
+    }
+
+    50% {
+        -webkit-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    }
+
+    70% {
+        -webkit-transform: rotate(3deg);
+        transform: rotate(3deg);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.animate__jackInTheBox {
+    -webkit-animation-name: jackInTheBox;
+    animation-name: jackInTheBox;
+}
+
+.animate__animated {
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-duration: var(--animate-duration);
+    animation-duration: var(--animate-duration);
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.animate__animated.animate__infinite {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+</style>

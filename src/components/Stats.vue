@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="table">
         <table class="styled-table">
             <thead>
                 <tr>
@@ -21,15 +21,8 @@
     </div>
 </template>
 
-
 <script setup>
-import { onMounted, ref } from "vue";
-import { getData } from '../api/loadData.js'
-const { data, load } = getData()
-
-onMounted(() => {
-    load()
-})
+const props = defineProps(['data'])
 
 const getTotalTime = (task) => {
     let totalTimeInSeconds = task.days.reduce((acc, day) => {
@@ -64,26 +57,38 @@ const formatTime = (totalSeconds) => {
 </script>
 
 <style scoped>
+.table {
+    border: 1px solid;
+    border-radius: 6px;
+    border-color: rgba(31, 35, 40, 0.15);
+    box-shadow: rgba(31, 35, 40, 0.1) 0px 1px 0px 0px,
+        rgba(255, 255, 255, 0.03) 0px 1px 0px 0px inset;
+    padding: 5px;
+    background: white;
+}
+
 .styled-table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: 0 auto;
-    font-size: 14px;
     text-align: left;
 }
 
-.styled-table thead th {
-    font-size: 12px;
-    background-color: var(--color-text);
-    color: white;
+.styled-table thead {
+    font-size: .8rem;
+    /* background-color: var(--color-text); */
+    color: var(--color-text);
     font-weight: 600;
-    border: 1px solid #d0d7de;
+    border-bottom: 1px solid #d0d7de;
     padding-left: 5px;
 }
 
+.styled-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid #dddddd;
+}
+
 .styled-table tbody td {
-    border: 1px solid #dddddd;
-    padding: 5px;
+    padding: 5px 0;
 }
 </style>

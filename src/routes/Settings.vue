@@ -1,26 +1,22 @@
 <template>
-  <div class="mt-2">
-
-    <div v-if="isUpdated" class="notification">
-      Archivo cargado correctamente
-    </div>
-    <div v-else>
-      <form class="row" @submit.prevent="saveTask">
-        <label for="inputField">Enter new task:</label>
-        <input v-model="inputValue">
-      </form>
-      <label>Storage path</label>
-      <input disabled v-model="filePathName">
-      <!-- <Greet /> -->
-      <button @click="leerJSONDialog">Load JSON</button>
-    </div>
-
+  <div v-if="isUpdated" class="notification">
+    Archivo cargado correctamente
+  </div>
+  <div v-else>
+    <form class="row" @submit.prevent="saveTask">
+      <label for="inputField">Enter new task:</label>
+      <input v-model="inputValue">
+    </form>
+    <label>Storage path</label>
+    <input disabled v-model="filePathName">
+    <!-- <Greet /> -->
+    <button @click="leerJSONDialog">Load JSON</button>
   </div>
 </template>
 
 <script setup>
 import { fs, dialog } from "@tauri-apps/api";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
 import { getFilePathName } from "../api/filePathName";
 const { filePathName } = getFilePathName()
@@ -65,10 +61,6 @@ async function leerJSONDialog () {
 </script>
 
 <style scoped>
-.mt-2 {
-  margin-top: 15px
-}
-
 .notification {
   border: 2px solid green;
   padding: 5px;

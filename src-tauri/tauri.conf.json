@@ -44,7 +44,7 @@
       {
         "title": "Peach task",
         "width": 250,
-        "height": 260,
+        "height": 240,
         "skipTaskbar": true,
         "alwaysOnTop": false
       }
