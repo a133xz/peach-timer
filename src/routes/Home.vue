@@ -20,8 +20,7 @@ import Crono from '../components/Crono.vue'
 import Stats from '../components/Stats.vue'
 import SubNav from '../components/SubNav.vue'
 
+import { selectedTab as isSelectedHome} from '../api/selectedTab';
 const selectedTask = ref(-1);
-const selectedTab = ref(true)
-const isSelectedHome = computed(() => selectedTab.value?.selectedTab)
 
 </script>

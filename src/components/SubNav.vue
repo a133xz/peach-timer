@@ -24,14 +24,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-const selectedTab = ref(true)
+import { selectedTab } from '../api/selectedTab';
 const setSelectedTab = (bool) => {
     selectedTab.value = bool
 };
-defineExpose({
-    selectedTab
-});
 </script>
 
 
