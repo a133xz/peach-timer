@@ -65,6 +65,12 @@ body {
   font-weight: 500;
 }
 
+select {
+  font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 600;
+}
+
 a {
   color: var(--color-text);
   text-decoration: inherit;
@@ -120,6 +126,14 @@ button:active:not(:disabled) {
   transform: translateY(2px);
 }
 
+.success {
+  background-color: rgb(31, 136, 61);
+}
+
+.success:disabled {
+  background-color: rgba(31, 136, 61, 0.49);
+}
+
 select {
   display: inline-block;
   max-width: 100%;
@@ -145,5 +159,5 @@ select {
   border-radius: 4px;
   margin-bottom: 5px;
   color: white;
-  background-color: rgb(14, 116, 14);
+  background-color: rgb(31, 136, 61);
 }

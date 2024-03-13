@@ -16,11 +16,10 @@ const props = defineProps(['selectedTask', 'data'])
 import JSConfetti from 'js-confetti'
 const jsConfetti = new JSConfetti()
 
-import { createEntry, saveData } from "../api/saveData";
-const { saveJSONFile } = saveData()
+import { createEntryAndStore } from "../api/saveData";
 
 let timerInterval;
-let tiempoTotalSegundos = 5000;
+let tiempoTotalSegundos = 0;
 
 const textButton = ref('Start')
 const timer = ref('0s');
@@ -76,9 +75,8 @@ function reiniciarCronometro () {
 
 function createEntryAndSave (taskIndex, isConfetti) {
     const task = props.data[taskIndex]
-    createEntry(task, tiempoTotalSegundos)
-    saveJSONFile(props.data)
-    if (isConfetti) {
+    createEntryAndStore(task, tiempoTotalSegundos, props.data).then(()=>{
+        if (isConfetti) {
         jsConfetti.addConfetti({
             emojis: ['🍑'], // Use the emoji as confetti
             emojiSize: 70,
@@ -86,6 +84,7 @@ function createEntryAndSave (taskIndex, isConfetti) {
         });
     }
     reiniciarCronometro()
+    })
 } 
 </script>
 

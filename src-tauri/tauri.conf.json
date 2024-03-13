@@ -44,7 +44,7 @@
       {
         "title": "peach timer",
         "width": 255,
-        "height": 260,
+        "height": 264,
         "skipTaskbar": true,
         "alwaysOnTop": false
       }

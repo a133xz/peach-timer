@@ -11,10 +11,10 @@
             <tbody>
                 <tr v-for="task in data" :key="task.name">
                     <td>{{ task.name }}</td>
-                    <td>
+                    <td v-if="task.days.length > 0">
                         {{ formatTime(getTimeToday(task)) }}
                     </td>
-                    <td>{{ formatTime(getTotalTime(task)) }}</td>
+                    <td v-if="task.days.length > 0">{{ formatTime(getTotalTime(task)) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -33,7 +33,6 @@ const getTotalTime = (task) => {
 
 const getTimeToday = (task) => {
     let lastItem = task.days[task.days.length - 1];
-
     return lastItem.time;
 }
 

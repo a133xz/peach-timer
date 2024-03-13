@@ -16,7 +16,6 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { getData } from '../api/loadData.js'
-import { saveData } from "../api/saveData";
 import Crono from '../components/Crono.vue'
 import Stats from '../components/Stats.vue'
 import SubNav from '../components/SubNav.vue'

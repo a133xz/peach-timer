@@ -1,9 +1,8 @@
 import { ref } from "vue";
 import { fs } from "@tauri-apps/api";
-import { getFilePathName } from "./filePathName";
+import { filePathName } from "./filePathName";
 
 export const getData = () => {
-  const { filePathName } = getFilePathName();
   if (!filePathName.value) {
     window.location.hash = "#/settings";
   }
