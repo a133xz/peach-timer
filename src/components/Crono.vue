@@ -20,7 +20,7 @@ import { createEntry, saveData } from "../api/saveData";
 const { saveJSONFile } = saveData()
 
 let timerInterval;
-let tiempoTotalSegundos = 0;
+let tiempoTotalSegundos = 5000;
 
 const textButton = ref('Start')
 const timer = ref('0s');
@@ -88,7 +88,6 @@ function createEntryAndSave (taskIndex, isConfetti) {
     reiniciarCronometro()
 } 
 </script>
-
 
 <style scoped>
 .flex {

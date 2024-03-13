@@ -4,6 +4,9 @@ import { getFilePathName } from "./filePathName";
 
 export const getData = () => {
   const { filePathName } = getFilePathName();
+  if (!filePathName.value) {
+    window.location.hash = "#/settings";
+  }
   const data = ref([]);
   const load = async () => {
     try {

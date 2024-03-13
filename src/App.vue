@@ -2,22 +2,10 @@
   <div class="main">
     <component :is="currentView" />
   </div>
-  <div class="nav">
-    <a href="#/" v-if="currentPath !== '#/' && currentPath !== ''">Back</a>
-  </div>
 </template>
-
-<style scoped>
-.nav {
-  padding-top: 3px;
-  text-align: center;
-}
-</style>
 
 <script setup>
 import { ref, computed } from 'vue'
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 
 import Home from './routes/Home.vue'
 import Settings from './routes/Settings.vue'

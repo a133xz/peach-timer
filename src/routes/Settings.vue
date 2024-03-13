@@ -1,21 +1,26 @@
 <template>
   <div v-if="isUpdated" class="notification">
-    Archivo cargado correctamente
+    {{ notification }}
   </div>
   <div v-else>
-    <form class="row" @submit.prevent="saveTask">
-      <label for="inputField">Enter new task:</label>
-      <input v-model="inputValue">
-    </form>
-    <label>Storage path</label>
-    <input disabled v-model="filePathName">
-    <!-- <Greet /> -->
-    <button @click="leerJSONDialog">Load JSON</button>
+    <div v-if="filePathName">
+      <form class="row" @submit.prevent="saveTask">
+        <label for="inputField">Create new task</label>
+        <input v-model="inputValue">
+      </form>
+      <label>Storage path</label>
+      <input disabled v-model="filePathName">
+      <!-- <Greet /> -->
+    </div>
+    <button @click="leerJSONDialog">Load storage file</button>
+  </div>
+  <div class="nav" v-if="filePathName || isUpdated">
+    <a href="#/">Back</a>
   </div>
 </template>
 
 <script setup>
-import { fs, dialog } from "@tauri-apps/api";
+import { dialog } from "@tauri-apps/api";
 import { ref } from "vue";
 
 import { getFilePathName } from "../api/filePathName";
@@ -27,6 +32,7 @@ const { data, load } = getData()
 // import Greet from "../components/Greet.vue";
 const inputValue = ref('');
 const isUpdated = ref(false)
+const notification = ref('Datos cargados correctamente')
 
 const saveTask = () => {
   load()
@@ -34,28 +40,25 @@ const saveTask = () => {
   saveJson()
 };
 
-const saveJson = async () => {
-  try {
-    await fs.writeTextFile(filePathName.value, JSON.stringify(data.value));
-    console.log("JSON escrito correctamente.");
-  } catch (error) {
-    console.error("Error al escribir el archivo JSON:", error);
-  }
-}
-
 async function leerJSONDialog () {
   try {
     const result = await dialog.open({ directory: false, multiple: false });
     if (!result || !result.length) {
-      console.log("No file selected.");
-
+      notification.value = "No file selected.";
       return;
     }
     localStorage.setItem('filePathName', result)
     isUpdated.value = true
   } catch (error) {
-    console.error("Error al leer el archivo JSON:", error);
+    notification.value = "Error al leer el archivo JSON";
   }
 }
 
 </script>
+
+<style scoped>
+.nav {
+  padding-top: 3px;
+  text-align: center;
+}
+</style>
