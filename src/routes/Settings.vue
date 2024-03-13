@@ -59,10 +59,3 @@ async function leerJSONDialog () {
 }
 
 </script>
-
-<style scoped>
-.notification {
-  border: 2px solid green;
-  padding: 5px;
-}
-</style>

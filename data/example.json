@@ -1,18 +1,1 @@
-[
-  {
-    "name": "Inglés",
-    "days": [
-      { "day": "4-3-2024", "time": 0 },
-      { "day": "5-3-2024", "time": 3 }
-    ]
-  },
-  {
-    "name": "Music",
-    "days": [
-      { "day": "4-3-2024", "time": 4 },
-      { "day": "5-3-2024", "time": 600 }
-    ]
-  },
-  { "name": "Bizz", "days": [{ "day": "4-3-2024", "time": 7 }] },
-  { "name": "Errands", "days": [{ "day": "4-3-2024", "time": 25058 }] }
-]
+[{"name":"Inglés","days":[{"day":"4-3-2024","time":0},{"day":"5-3-2024","time":3},{"day":"13-3-2024","time":3}]},{"name":"Music","days":[{"day":"4-3-2024","time":4},{"day":"5-3-2024","time":600},{"day":"13-3-2024","time":15}]},{"name":"Bizz","days":[{"day":"4-3-2024","time":7},{"day":"13-3-2024","time":3}]},{"name":"Errands","days":[{"day":"4-3-2024","time":25058},{"day":"13-3-2024","time":0}]}]

@@ -4,27 +4,32 @@
         <div v-if="false" class="animate__animated animate__jackInTheBox animate__infinite">🍑</div>
     </div>
     <button :disabled="selectedTask === -1" @click="controlTimer">{{ textButton }}</button>
-    <!-- <button class="save" @click="saveData">Save</button> -->
+    <div style="text-align: center;" v-show="textButton === 'Continue'">
+        <a @click="createEntryAndSave(selectedTask, true)">Save</a>
+    </div>
 </template>
 
 <script setup>
-import { fs } from "@tauri-apps/api";
 import { ref, watch } from "vue";
-import { getFilePathName } from "../api/filePathName";
-const { filePathName } = getFilePathName();
-
 const props = defineProps(['selectedTask', 'data'])
 
+import JSConfetti from 'js-confetti'
+const jsConfetti = new JSConfetti()
+
+import { createEntry, saveData } from "../api/saveData";
+const { saveJSONFile } = saveData()
+
 let timerInterval;
-let tiempoTotalSegundos;
+let tiempoTotalSegundos = 0;
 
 const textButton = ref('Start')
 const timer = ref('0s');
 const timerRunning = ref(false); // Variable para almacenar el tiempo total en segundos
 
 watch(() => props.selectedTask, (newValue, oldValue) => {
-    //saveData()
-    reiniciarCronometro()
+    if (oldValue >= 0) {
+        createEntryAndSave(oldValue)
+    }
 });
 
 const formatTime = (totalSeconds) => {
@@ -69,47 +74,19 @@ function reiniciarCronometro () {
     timerRunning.value = false
 }
 
-
-// Guardado
-const saveData = async () => {
-    const tasks = props.data
-    createEntry(tasks)
-    await saveJson(tasks)
+function createEntryAndSave (taskIndex, isConfetti) {
+    const task = props.data[taskIndex]
+    createEntry(task, tiempoTotalSegundos)
+    saveJSONFile(props.data)
+    if (isConfetti) {
+        jsConfetti.addConfetti({
+            emojis: ['🍑'], // Use the emoji as confetti
+            emojiSize: 70,
+            confettiNumber: 40, // Number of confetti particles
+        });
+    }
     reiniciarCronometro()
-}
-
-const createEntry = (tasks) => {
-    const task = tasks[props.selectedTask];
-
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
-
-    let dayExists = false;
-
-    // Iterar sobre el arreglo de días
-    for (const day of task.days) {
-        // Verificar si el día ya existe
-        if (day.day === formattedDate) {
-            // Sumar el tiempo al día existente
-            day.time += tiempoTotalSegundos;
-            dayExists = true;
-            break; // Terminar la iteración ya que encontramos el día
-        }
-    }
-    // Si el día no existe, agregarlo al arreglo
-    if (!dayExists) {
-        task.days.push({ day: formattedDate, time: tiempoTotalSegundos });
-    }
-};
-
-const saveJson = async (tasks) => {
-    try {
-        await fs.writeTextFile(filePathName, JSON.stringify(tasks));
-        console.log("JSON escrito correctamente.");
-    } catch (error) {
-        console.error("Error al escribir el archivo JSON:", error);
-    }
-}
+} 
 </script>
 
 

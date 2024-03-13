@@ -42,9 +42,9 @@
     },
     "windows": [
       {
-        "title": "Peach task",
-        "width": 250,
-        "height": 240,
+        "title": "peach timer",
+        "width": 255,
+        "height": 260,
         "skipTaskbar": true,
         "alwaysOnTop": false
       }

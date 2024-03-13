@@ -72,6 +72,7 @@ a {
 
 a:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 p {
@@ -132,4 +133,9 @@ select {
 
 .left {
   text-align: left;
+}
+
+.notification {
+  border: 2px solid green;
+  padding: 5px;
 }

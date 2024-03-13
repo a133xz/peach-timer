@@ -4,7 +4,6 @@
   </div>
   <div class="nav">
     <a href="#/" v-if="currentPath !== '#/' && currentPath !== ''">Back</a>
-    <a href="#/settings" v-if="currentPath === '#/' || currentPath === ''">Settings</a>
   </div>
 </template>
 

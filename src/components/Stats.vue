@@ -84,6 +84,10 @@ const formatTime = (totalSeconds) => {
     padding-left: 5px;
 }
 
+thead th {
+    padding-bottom: 5px;
+}
+
 .styled-table tbody tr:not(:last-child) {
     border-bottom: 1px solid #dddddd;
 }
