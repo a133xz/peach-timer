@@ -11,12 +11,14 @@
 
 <script setup>
 import { ref, watch } from "vue";
-const props = defineProps(['selectedTask', 'data'])
+import { data } from '../api/loadData.js'
+
+const props = defineProps(['selectedTask'])
 
 import JSConfetti from 'js-confetti'
 const jsConfetti = new JSConfetti()
 
-import { createEntryAndStore } from "../api/saveData";
+import { addTimeAndStore } from "../api/saveData";
 
 let timerInterval;
 let tiempoTotalSegundos = 0;
@@ -74,8 +76,8 @@ function reiniciarCronometro () {
 }
 
 function createEntryAndSave (taskIndex, isConfetti) {
-    const task = props.data[taskIndex]
-    createEntryAndStore(task, tiempoTotalSegundos, props.data).then(()=>{
+    const task = data.value[taskIndex]
+    addTimeAndStore(task, tiempoTotalSegundos, data.value).then(()=>{
         if (isConfetti) {
         jsConfetti.addConfetti({
             emojis: ['🍑'], // Use the emoji as confetti

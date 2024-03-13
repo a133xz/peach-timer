@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-const props = defineProps(['data'])
+import { data } from '../api/loadData.js'
 
 const getTotalTime = (task) => {
     let totalTimeInSeconds = task.days.reduce((acc, day) => {

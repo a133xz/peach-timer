@@ -3,7 +3,7 @@
     <label>New timer</label>
     <input v-model="inputValue">
   </form>
-  <button v-if="filePathName" @click="createFileAndSave" class="success" :disabled="isDisabled">Create timer</button>
+  <button v-if="filePathName" @click="createTimerAndSave" class="success" :disabled="isDisabled">Create timer</button>
   <button v-else @click="createFileAndSave" class="success" :disabled="isDisabled">Create storage file</button>
   <hr />
   <div v-if="filePathName">
@@ -16,14 +16,11 @@
 </template>
 
 <script setup>
-import { dialog } from "@tauri-apps/api";
 import { ref, computed } from "vue";
-
 import { filePathName } from "../api/filePathName";
-import { createStorageFile } from "../api/saveData";
+import { createStorageFile, createTimerAndStore } from "../api/saveData";
 
 const inputValue = ref('');
-const isUpdated = ref(false)
 const notification = ref('Data loaded successfully')
 
 const isDisabled = computed(() => {
@@ -35,6 +32,13 @@ const createFileAndSave = async () => {
   window.location.hash = "#/";
 };
 
+const createTimerAndSave = async () => {
+  await createTimerAndStore(inputValue.value)
+  window.location.hash = "#/";
+};
+
+// Move to LoadData
+import { dialog } from "@tauri-apps/api";
 async function leerJSONDialog () {
   try {
     const result = await dialog.open({ directory: false, multiple: false });
