@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { data } from '../api/loadData.js'
 import Crono from '../components/Crono.vue'
 import Stats from '../components/Stats.vue'
