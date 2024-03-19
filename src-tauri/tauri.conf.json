@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "peach-method",
+    "productName": "Peach Timer",
     "version": "0.0.0"
   },
   "tauri": {
@@ -30,7 +30,7 @@
     },
     "windows": [
       {
-        "title": "peach timer",
+        "title": "Peach Timer",
         "width": 255,
         "height": 264,
         "alwaysOnTop": false,
