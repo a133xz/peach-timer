@@ -45,7 +45,9 @@
       "active": true,
       "targets": "all",
       "identifier": "com.antonio.dev",
-      "icon": ["icons/icon.png", "icons/icon.ico", "icons/icon.icns"]
+      "icon": [
+      "icons/icon.icns",
+      "icons/icon.ico"]
     },
     "systemTray": {
       "iconPath": "icons/icon.png",
