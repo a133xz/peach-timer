@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "release": "npm run build & npm run tauri build",
+    "zip": "find src-tauri/target/release/bundle/dmg -type f -name '*.dmg' -exec zip -j PeachTimer.zip {} +"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.5.3",
