@@ -64,5 +64,7 @@ async function leerJSONDialog () {
 hr {
   margin: 10px -8px;
   border-radius: 0;
+  border: 0;
+  border-top: 0.5px solid rgb(191, 184, 184);
 }
 </style>
